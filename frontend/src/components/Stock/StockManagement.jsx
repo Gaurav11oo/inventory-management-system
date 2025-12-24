@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion'; // ✅ FIX 1
 import { ArrowUpCircle, ArrowDownCircle } from 'lucide-react';
 import StockForm from './StockForm';
 import { getProducts, updateStock } from '../../services/productService';
@@ -7,10 +8,6 @@ const StockManagement = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [operation, setOperation] = useState('in');
-
-    useEffect(() => {
-        fetchProducts();
-    }, []);
 
     const fetchProducts = async () => {
         try {
@@ -23,25 +20,69 @@ const StockManagement = () => {
         }
     };
 
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
     const handleStockUpdate = async (productId, quantity, notes) => {
+        if (!productId || !quantity || quantity <= 0) {
+            alert('Please enter a valid quantity');
+            return;
+        }
+
         try {
-            await updateStock(productId, operation, parseInt(quantity));
+            await updateStock(
+                productId,
+                operation,
+                parseInt(quantity, 10) // ✅ FIX 2
+                // notes can be passed here if backend supports it
+            );
+
             await fetchProducts();
-            alert(`Stock ${operation === 'in' ? 'added' : 'removed'} successfully!`);
+
+            alert(
+                `Stock ${operation === 'in' ? 'added' : 'removed'
+                } successfully!`
+            );
         } catch (error) {
             console.error('Error updating stock:', error);
-            alert(error.response?.data?.message || 'Failed to update stock');
+            alert(
+                error?.response?.data?.message || 'Failed to update stock'
+            );
         }
     };
 
+    // =========================
+    // LOADING STATE
+    // =========================
+
     if (loading) {
-        return <div className="text-center py-8">Loading...</div>;
+        return (
+            <div className="flex items-center justify-center h-64">
+                <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        ease: 'linear',
+                    }}
+                    className="w-16 h-16 border-4 border-indigo-600 border-t-transparent rounded-full"
+                />
+            </div>
+        );
     }
+
+    // =========================
+    // RENDER
+    // =========================
 
     return (
         <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800">Stock Management</h2>
+            <h2 className="text-2xl font-bold text-gray-800">
+                Stock Management
+            </h2>
 
+            {/* Stock Operation */}
             <div className="bg-white rounded-lg shadow p-6">
                 <div className="flex items-center space-x-4 mb-6">
                     <button
@@ -54,6 +95,7 @@ const StockManagement = () => {
                         <ArrowUpCircle className="w-5 h-5" />
                         <span>Stock In</span>
                     </button>
+
                     <button
                         onClick={() => setOperation('out')}
                         className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${operation === 'out'
@@ -73,45 +115,79 @@ const StockManagement = () => {
                 />
             </div>
 
+            {/* Stock Table */}
             <div className="bg-white rounded-lg shadow overflow-hidden">
                 <div className="px-6 py-4 border-b">
-                    <h3 className="text-lg font-semibold text-gray-800">Current Stock Levels</h3>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                        Current Stock Levels
+                    </h3>
                 </div>
+
                 <div className="overflow-x-auto">
                     <table className="w-full">
                         <thead className="bg-gray-50">
                             <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Product</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Current Stock</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Min Stock</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                    Product
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                    Category
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                    Current Stock
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                    Min Stock
+                                </th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                    Status
+                                </th>
                             </tr>
                         </thead>
+
                         <tbody className="divide-y divide-gray-200">
-                            {products.map((product) => (
-                                <tr key={product._id} className="hover:bg-gray-50">
-                                    <td className="px-6 py-4 text-sm font-medium text-gray-900">{product.name}</td>
-                                    <td className="px-6 py-4 text-sm text-gray-600">{product.category}</td>
-                                    <td className="px-6 py-4 text-sm text-gray-900">
-                                        {product.currentStock} {product.unit}
-                                    </td>
-                                    <td className="px-6 py-4 text-sm text-gray-600">
-                                        {product.minStock} {product.unit}
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${product.currentStock <= product.minStock
-                                                ? 'bg-red-100 text-red-800'
-                                                : product.currentStock <= product.minStock * 1.5
-                                                    ? 'bg-yellow-100 text-yellow-800'
-                                                    : 'bg-green-100 text-green-800'
-                                            }`}>
-                                            {product.currentStock <= product.minStock ? 'Critical' :
-                                                product.currentStock <= product.minStock * 1.5 ? 'Low' : 'Good'}
-                                        </span>
-                                    </td>
-                                </tr>
-                            ))}
+                            {products.map((product) => {
+                                const isCritical =
+                                    product.currentStock <= product.minStock;
+                                const isLow =
+                                    product.currentStock <= product.minStock * 1.5;
+
+                                return (
+                                    <tr
+                                        key={product._id}
+                                        className="hover:bg-gray-50"
+                                    >
+                                        <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                                            {product.name}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-600">
+                                            {product.category}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-900">
+                                            {product.currentStock} {product.unit}
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-600">
+                                            {product.minStock} {product.unit}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <span
+                                                className={`px-2 py-1 text-xs font-medium rounded-full ${isCritical
+                                                        ? 'bg-red-100 text-red-800'
+                                                        : isLow
+                                                            ? 'bg-yellow-100 text-yellow-800'
+                                                            : 'bg-green-100 text-green-800'
+                                                    }`}
+                                            >
+                                                {isCritical
+                                                    ? 'Critical'
+                                                    : isLow
+                                                        ? 'Low'
+                                                        : 'Good'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>

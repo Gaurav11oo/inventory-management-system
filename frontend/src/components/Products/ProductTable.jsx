@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Edit2, Trash2, Package, TrendingUp, TrendingDown, Search, Filter, MoreVertical, AlertCircle } from 'lucide-react';
+import { Edit2, Trash2, Package, TrendingUp, TrendingDown, Search, Filter, AlertCircle } from 'lucide-react';
 
 // Helper function
 const isLowStock = (product) => product.currentStock <= product.minStock;
 
 const ProductTable = ({ products, onEdit, onDelete }) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [hoveredRow, setHoveredRow] = useState(null);
+    const [setHoveredRow] = useState(null);
 
     const filteredProducts = products.filter(product =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

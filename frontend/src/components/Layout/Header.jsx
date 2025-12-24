@@ -14,16 +14,12 @@ import {
     FiMenu,
     FiX
 } from 'react-icons/fi';
-import {
-    BsFillBellFill,
-    BsPersonCircle
-} from 'react-icons/bs';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 
 const Header = () => {
     const { user, logout } = useAuth();
-    const { theme, toggleTheme, isDark } = useTheme();
+    const { toggleTheme, isDark } = useTheme();
     const [currentTime, setCurrentTime] = useState(new Date());
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);

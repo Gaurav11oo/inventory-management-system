@@ -1,10 +1,32 @@
-
 import React, { useState, useEffect } from 'react';
-import { Package, BarChart3, AlertTriangle, TrendingUp, TrendingDown, DollarSign, Box, Layers, ShoppingCart, Activity } from 'lucide-react';
+import {
+    Package,
+    BarChart3,
+    AlertTriangle,
+    TrendingUp,
+    DollarSign,
+    Box,
+    Layers,
+    Activity,
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 import CountUp from 'react-countup';
-import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, RadialBarChart, RadialBar } from 'recharts';
-import StatsCard from './StatsCard';
+
+import {
+    BarChart,
+    Bar,
+    PieChart,
+    Pie,
+    Cell,
+    AreaChart,
+    Area,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    ResponsiveContainer,
+} from 'recharts';
+
 import LowStockAlert from './LowStockAlert';
 import { getProducts, getLowStockProducts } from '../../services/productService';
 import { calculateTotalValue, groupByCategory } from '../../utils/helpers';
@@ -72,12 +94,9 @@ const Dashboard = () => {
             value: p.currentStock * p.price,
             stock: p.currentStock
         }));
+    [...products]
+        .sort((a, b) => (b.currentStock * b.price) - (a.currentStock * a.price))
 
-    const recentActivity = products.slice(0, 5).map(p => ({
-        name: p.name,
-        stock: p.currentStock,
-        change: Math.random() > 0.5 ? 'up' : 'down'
-    }));
 
     const COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#3b82f6'];
 
