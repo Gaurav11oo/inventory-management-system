@@ -89,14 +89,14 @@ const Login = () => {
                     </div>
                 </form>
 
-                <div className="mt-6 pt-6 border-t border-gray-200">
+                {/* <div className="mt-6 pt-6 border-t border-gray-200">
                     <p className="text-center text-xs text-gray-500">
                         Demo Credentials (if backend has default user):
                     </p>
                     <p className="text-center text-xs text-gray-600 font-medium mt-1">
-                        Username: admin / Password: admin123
+                        Username: Admin / Password: dmin123
                     </p>
-                </div>
+                </div> */}
             </div>
         </div>
     );

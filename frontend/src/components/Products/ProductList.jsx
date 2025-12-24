@@ -81,7 +81,7 @@ const ProductList = () => {
                 <h2 className="text-2xl font-bold text-gray-800">Product Management</h2>
                 <button
                     onClick={() => setShowForm(true)}
-                    className="flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+                    className="flex items-center space-x-2 bg-[#0060c1] text-white px-4 py-2 rounded-lg hover:bg-[#0b64fe] transition-colors"
                 >
                     <Plus className="w-4 h-4" />
                     <span>Add Product</span>

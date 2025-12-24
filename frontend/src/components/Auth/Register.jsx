@@ -130,7 +130,7 @@ const Register = () => {
                         >
                             <option value="staff">Staff</option>
                             <option value="manager">Manager</option>
-                            <option value="admin">Admin</option>
+                            {/* <option value="admin">Admin</option> */}
                         </select>
                         <p className="text-xs text-gray-500 mt-1">Select your role in the organization</p>
                     </div>

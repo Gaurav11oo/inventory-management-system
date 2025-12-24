@@ -1,91 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import { Package, BarChart3, AlertTriangle } from 'lucide-react';
-// import StatsCard from './StatsCard';
-// import LowStockAlert from './LowStockAlert';
-// import { getProducts, getLowStockProducts } from '../../services/productService';
-// import { calculateTotalValue } from '../../utils/helpers';
-
-// const Dashboard = () => {
-//     const [products, setProducts] = useState([]);
-//     const [lowStockProducts, setLowStockProducts] = useState([]);
-//     const [loading, setLoading] = useState(true);
-
-//     useEffect(() => {
-//         fetchData();
-//     }, []);
-
-//     const fetchData = async () => {
-//         try {
-//             const [productsData, lowStockData] = await Promise.all([
-//                 getProducts(),
-//                 getLowStockProducts()
-//             ]);
-//             setProducts(productsData);
-//             setLowStockProducts(lowStockData);
-//         } catch (error) {
-//             console.error('Error fetching data:', error);
-//         } finally {
-//             setLoading(false);
-//         }
-//     };
-
-//     const totalValue = calculateTotalValue(products);
-
-//     if (loading) {
-//         return <div className="text-center py-8">Loading...</div>;
-//     }
-
-//     return (
-//         <div className="space-y-6">
-//             <h2 className="text-2xl font-bold text-gray-800">Dashboard</h2>
-
-//             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-//                 <StatsCard
-//                     title="Total Products"
-//                     value={products.length}
-//                     icon={Package}
-//                     color="indigo"
-//                 />
-//                 <StatsCard
-//                     title="Stock Value"
-//                     value={`$${totalValue.toLocaleString()}`}
-//                     icon={BarChart3}
-//                     color="green"
-//                 />
-//                 <StatsCard
-//                     title="Low Stock Alerts"
-//                     value={lowStockProducts.length}
-//                     icon={AlertTriangle}
-//                     color="red"
-//                 />
-//             </div>
-
-//             {lowStockProducts.length > 0 && (
-//                 <LowStockAlert products={lowStockProducts} />
-//             )}
-
-//             <div className="bg-white rounded-lg shadow p-6">
-//                 <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Products</h3>
-//                 <div className="space-y-3">
-//                     {products.slice(0, 5).map((product) => (
-//                         <div key={product._id} className="flex items-center justify-between p-3 bg-gray-50 rounded">
-//                             <div>
-//                                 <p className="font-medium text-gray-800">{product.name}</p>
-//                                 <p className="text-sm text-gray-600">{product.category}</p>
-//                             </div>
-//                             <div className="text-right">
-//                                 <p className="font-semibold text-gray-800">{product.currentStock} {product.unit}</p>
-//                                 <p className="text-sm text-gray-600">${product.price}/{product.unit}</p>
-//                             </div>
-//                         </div>
-//                     ))}
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Dashboard;
 
 import React, { useState, useEffect } from 'react';
 import { Package, BarChart3, AlertTriangle, TrendingUp, TrendingDown, DollarSign, Box, Layers, ShoppingCart, Activity } from 'lucide-react';
@@ -198,14 +110,16 @@ const Dashboard = () => {
             {/* Header Section */}
             <motion.div variants={itemVariants} className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    <h2 className="text-3xl font-bold bg-gradient-to-r from-[#3c3cbf] via-[#05c9ff] to-[#464545]
+ bg-clip-text text-transparent">
                         Dashboard Overview
                     </h2>
                     <p className="text-gray-600 mt-1">Welcome back! Here's your inventory status</p>
                 </div>
                 <motion.div
                     whileHover={{ scale: 1.05 }}
-                    className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-xl shadow-lg flex items-center space-x-2 cursor-pointer"
+                    className="bg-gradient-to-r from-[#000046] via-[#1CB5E0] to-[#000046]
+ text-white px-6 py-3 rounded-xl shadow-lg flex items-center space-x-2 cursor-pointer"
                 >
                     <Activity className="w-5 h-5" />
                     <span className="font-semibold">Real-time Updates</span>
@@ -471,8 +385,8 @@ const Dashboard = () => {
                                     <Box className="w-5 h-5 text-indigo-600" />
                                 </div>
                                 <span className={`px-2 py-1 text-xs font-semibold rounded-full ${product.currentStock > product.minStock
-                                        ? 'bg-green-100 text-green-700'
-                                        : 'bg-red-100 text-red-700'
+                                    ? 'bg-green-100 text-green-700'
+                                    : 'bg-red-100 text-red-700'
                                     }`}>
                                     {product.currentStock > product.minStock ? 'In Stock' : 'Low'}
                                 </span>
@@ -497,7 +411,12 @@ const Dashboard = () => {
             {/* Quick Stats Bar */}
             <motion.div
                 variants={itemVariants}
-                className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-2xl shadow-xl p-6 text-white"
+                className="rounded-2xl shadow-xl p-6 text-white"
+                style={{
+                    backgroundImage:
+                        "linear-gradient(90deg, #f3f0c3 0%, #ffa858 25%, #730000 50%, #001b1c 75%, #0aac86 100%)",
+                }}
+
             >
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div className="text-center">

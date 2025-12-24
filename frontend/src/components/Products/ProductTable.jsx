@@ -1,102 +1,3 @@
-// import React from 'react';
-// import { Edit2, Trash2 } from 'lucide-react';
-// import { isLowStock } from '../../utils/helpers';
-
-// const ProductTable = ({ products, onEdit, onDelete }) => {
-//     return (
-//         <div className="bg-white rounded-lg shadow overflow-hidden">
-//             <div className="overflow-x-auto">
-//                 <table className="w-full">
-//                     <thead className="bg-gray-50">
-//                         <tr>
-//                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-//                                 ID
-//                             </th>
-//                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-//                                 Name
-//                             </th>
-//                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-//                                 Category
-//                             </th>
-//                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-//                                 Unit
-//                             </th>
-//                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-//                                 Price
-//                             </th>
-//                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-//                                 Min Stock
-//                             </th>
-//                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-//                                 Current Stock
-//                             </th>
-//                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-//                                 Status
-//                             </th>
-//                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-//                                 Actions
-//                             </th>
-//                         </tr>
-//                     </thead>
-//                     <tbody className="divide-y divide-gray-200">
-//                         {products.map((product) => (
-//                             <tr key={product._id} className="hover:bg-gray-50">
-//                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-//                                     {product.productId}
-//                                 </td>
-//                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-//                                     {product.name}
-//                                 </td>
-//                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-//                                     {product.category}
-//                                 </td>
-//                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-//                                     {product.unit}
-//                                 </td>
-//                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-//                                     ${product.price}
-//                                 </td>
-//                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-//                                     {product.minStock}
-//                                 </td>
-//                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">
-//                                     {product.currentStock}
-//                                 </td>
-//                                 <td className="px-6 py-4 whitespace-nowrap">
-//                                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${isLowStock(product)
-//                                             ? 'bg-red-100 text-red-800'
-//                                             : 'bg-green-100 text-green-800'
-//                                         }`}>
-//                                         {isLowStock(product) ? 'Low Stock' : 'In Stock'}
-//                                     </span>
-//                                 </td>
-//                                 <td className="px-6 py-4 whitespace-nowrap">
-//                                     <div className="flex space-x-2">
-//                                         <button
-//                                             onClick={() => onEdit(product)}
-//                                             className="text-indigo-600 hover:text-indigo-800 transition-colors"
-//                                         >
-//                                             <Edit2 className="w-4 h-4" />
-//                                         </button>
-//                                         <button
-//                                             onClick={() => onDelete(product._id)}
-//                                             className="text-red-600 hover:text-red-800 transition-colors"
-//                                         >
-//                                             <Trash2 className="w-4 h-4" />
-//                                         </button>
-//                                     </div>
-//                                 </td>
-//                             </tr>
-//                         ))}
-//                     </tbody>
-//                 </table>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default ProductTable;
-
 import React, { useState } from 'react';
 import { Edit2, Trash2, Package, TrendingUp, TrendingDown, Search, Filter, MoreVertical, AlertCircle } from 'lucide-react';
 
@@ -118,18 +19,20 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
 
     return (
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-            {/* Header Section with Search */}
-            <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-6 py-6">
+            <div className="bg-inventory-gradient px-6 py-6">
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-3">
                         <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg">
                             <Package className="w-6 h-6 text-white" />
                         </div>
                         <div>
-                            <h2 className="text-2xl font-bold text-white">Product Inventory</h2>
-                            <p className="text-indigo-100 text-sm">{filteredProducts.length} items total</p>
+                            <h2 className="text-2xl font-bold text-white">Manage Inventory</h2>
+                            <p className="text-white/80 text-sm">
+                                {filteredProducts.length} items total
+                            </p>
                         </div>
                     </div>
+
                     <button className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2">
                         <Filter className="w-4 h-4" />
                         <span className="text-sm font-medium">Filters</span>
@@ -228,8 +131,8 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
                                         <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                                             <div
                                                 className={`h-full rounded-full transition-all duration-500 ${isLowStock(product)
-                                                        ? 'bg-gradient-to-r from-red-500 to-orange-500'
-                                                        : 'bg-gradient-to-r from-emerald-500 to-teal-500'
+                                                    ? 'bg-gradient-to-r from-red-500 to-orange-500'
+                                                    : 'bg-gradient-to-r from-emerald-500 to-teal-500'
                                                     }`}
                                                 style={{ width: `${Math.min(getStockPercentage(product), 100)}%` }}
                                             />
@@ -265,9 +168,6 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
                                             title="Delete Product"
                                         >
                                             <Trash2 className="w-4 h-4 group-hover/delete:rotate-12 transition-transform" />
-                                        </button>
-                                        <button className="p-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-lg transition-all duration-300 hover:scale-110 opacity-0 group-hover:opacity-100">
-                                            <MoreVertical className="w-4 h-4" />
                                         </button>
                                     </div>
                                 </td>

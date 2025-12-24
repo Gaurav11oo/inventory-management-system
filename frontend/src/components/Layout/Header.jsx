@@ -49,8 +49,8 @@ const Header = () => {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             className={`sticky top-0 z-50 backdrop-blur-lg border-b transition-all duration-300 ${isDark
-                    ? 'bg-dark-bg/95 border-dark-border shadow-2xl'
-                    : 'bg-white/95 border-gray-200 shadow-lg'
+                ? 'bg-dark-bg/95 border-dark-border shadow-2xl'
+                : 'bg-white/95 border-gray-200 shadow-lg'
                 }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,8 +61,8 @@ const Header = () => {
                             whileHover={{ rotate: 360, scale: 1.1 }}
                             transition={{ duration: 0.6 }}
                             className={`p-3 rounded-2xl ${isDark
-                                    ? 'bg-gradient-to-br from-indigo-600 to-purple-600'
-                                    : 'bg-gradient-to-br from-indigo-500 to-purple-500'
+                                ? 'bg-gradient-to-br from-[#021B79] to-[#0575E6]'
+                                : 'bg-gradient-to-r from-[#0575E6] via-[#021B79] to-[#0575E6]'
                                 } shadow-lg`}
                         >
                             <FiPackage className="w-7 h-7 text-white" />
@@ -72,10 +72,11 @@ const Header = () => {
                             <motion.h1
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className={`text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent ${isDark && 'from-indigo-400 to-purple-400'
+                                className={`text-2xl font-bold bg-gradient-to-r from-[#000428] via-[#004e92] to-[#000428]
+ bg-clip-text text-transparent ${isDark && ' from-[#021B79] to-[#0575E6]'
                                     }`}
                             >
-                                Inventory Pro
+                                Inventory System
                             </motion.h1>
                             <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                                 Manufacturing Management
@@ -89,8 +90,8 @@ const Header = () => {
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             className={`flex items-center space-x-2 px-4 py-2 rounded-xl ${isDark
-                                    ? 'bg-dark-card hover:bg-dark-hover'
-                                    : 'bg-gray-100 hover:bg-gray-200'
+                                ? 'bg-dark-card hover:bg-dark-hover'
+                                : 'bg-gray-100 hover:bg-gray-200'
                                 } transition-all duration-200`}
                         >
                             <FiCalendar className={`w-5 h-5 ${isDark ? 'text-indigo-400' : 'text-indigo-600'}`} />
@@ -108,8 +109,8 @@ const Header = () => {
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             className={`flex items-center space-x-2 px-4 py-2 rounded-xl ${isDark
-                                    ? 'bg-dark-card hover:bg-dark-hover'
-                                    : 'bg-gray-100 hover:bg-gray-200'
+                                ? 'bg-dark-card hover:bg-dark-hover'
+                                : 'bg-gray-100 hover:bg-gray-200'
                                 } transition-all duration-200`}
                         >
                             <FiClock className={`w-5 h-5 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
@@ -132,8 +133,8 @@ const Header = () => {
                             whileTap={{ scale: 0.9 }}
                             onClick={toggleTheme}
                             className={`p-3 rounded-xl transition-all duration-300 ${isDark
-                                    ? 'bg-dark-card hover:bg-dark-hover text-yellow-400'
-                                    : 'bg-gray-100 hover:bg-gray-200 text-indigo-600'
+                                ? 'bg-dark-card hover:bg-dark-hover text-yellow-400'
+                                : 'bg-gray-100 hover:bg-gray-200 text-indigo-600'
                                 }`}
                             title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
                         >
@@ -167,8 +168,8 @@ const Header = () => {
                                 whileTap={{ scale: 0.9 }}
                                 onClick={() => setShowNotifications(!showNotifications)}
                                 className={`p-3 rounded-xl transition-all duration-200 relative ${isDark
-                                        ? 'bg-dark-card hover:bg-dark-hover text-dark-text'
-                                        : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                                    ? 'bg-dark-card hover:bg-dark-hover text-dark-text'
+                                    : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
                                     }`}
                             >
                                 <FiBell className="w-5 h-5" />
@@ -233,8 +234,8 @@ const Header = () => {
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setShowUserMenu(!showUserMenu)}
                                 className={`flex items-center space-x-3 px-4 py-2 rounded-xl transition-all duration-200 ${isDark
-                                        ? 'bg-dark-card hover:bg-dark-hover'
-                                        : 'bg-gray-100 hover:bg-gray-200'
+                                    ? 'bg-dark-card hover:bg-dark-hover'
+                                    : 'bg-gray-100 hover:bg-gray-200'
                                     }`}
                             >
                                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg">
