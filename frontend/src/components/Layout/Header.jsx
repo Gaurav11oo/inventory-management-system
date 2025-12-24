@@ -72,10 +72,11 @@ const Header = () => {
  bg-clip-text text-transparent ${isDark && ' from-[#021B79] to-[#0575E6]'
                                     }`}
                             >
-                                Inventory System
+                                Inventory Management System
                             </motion.h1>
                             <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                                Manufacturing Management
+                                for Manufacturers
+
                             </p>
                         </div>
                     </div>
